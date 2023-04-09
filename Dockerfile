@@ -5,7 +5,7 @@ FROM rubylang/ruby:3.2.0-dev-jammy as base
 RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
     apt-get update
     apt-get upgrade -yy
-    DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential bison gperf unzip
+    DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential bison gperf unzip autoconf libyaml-dev
 COMMAND
 
 FROM base as source
