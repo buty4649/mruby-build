@@ -9,6 +9,8 @@ ENV["MRUBY_CONFIG"] = build_config
 ENV["MRUBY_BUILD_DIR"] = build_dir
 ENV["INSTALL_DIR"] = install_dir
 
+task = ARGV.first || "all"
+
 require "rake"
 load "#{mruby_root}/Rakefile"
-Rake::Task["all"].invoke
+Rake::Task[task].invoke
