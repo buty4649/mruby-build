@@ -4,5 +4,5 @@ Useful mruby build tool
 ## Usage
 
 ```
-docker run --rm -v $(pwd):/build buty4649/mruby-build:3.2.0
+docker run --rm -v $(pwd):/src buty4649/mruby-build:3.2.0
 ```

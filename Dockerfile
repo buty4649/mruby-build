@@ -26,5 +26,5 @@ FROM base
 COPY --from=source /mruby /mruby
 COPY entrypoint.rb /entrypoint.rb
 
-WORKDIR /build
+WORKDIR /src
 ENTRYPOINT [ "/entrypoint.rb" ]
