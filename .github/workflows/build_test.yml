@@ -6,7 +6,8 @@ on:
       - .github/workflows/build-test.yml
       - .github/workflows/docker_image_build.yml
       - Dockerfile
-      - entrypoint.rb
+      - entrypoint.sh
+      - mruby-build.rb
 
 jobs:
   build:

@@ -7,7 +7,7 @@ RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
     apt-get upgrade -yy
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         build-essential git bison gperf libtool-bin autoconf libyaml-dev \
-        ccache unzip xz-utils wget
+        ccache unzip xz-utils wget gosu
 COMMAND
 
 FROM base as source
@@ -58,7 +58,8 @@ RUN ln -s /usr/local/share/zig/zig /usr/local/bin/zig
 COPY --from=MacOS_SDK MacOSX.sdk /usr/local/share/MacOSX.sdk
 ENV MACOSX_SDK_PATH=/usr/local/share/MacOSX.sdk
 
-COPY entrypoint.rb /entrypoint.rb
+COPY entrypoint.sh /entrypoint.sh
+COPY mruby-build.rb /mruby-build.rb
 
 WORKDIR /src
-ENTRYPOINT [ "/entrypoint.rb" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
