@@ -1,0 +1,16 @@
+name: Build test
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/build-test.yml
+      - .github/workflows/docker_image_build.yml
+      - Dockerfile
+      - Rakefile
+
+jobs:
+  build:
+    uses: ./.github/workflows/docker_image_build.yml
+    secrets:
+      dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
