@@ -1,13 +1,13 @@
 # syntax=docker/dockerfile:1-labs
 
-FROM rubylang/ruby:3.2.0-jammy as base
+FROM rubylang/ruby:3.2-jammy as base
 
 RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
     apt-get update
     apt-get upgrade -yy
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         build-essential git bison gperf libtool-bin autoconf libyaml-dev \
-        unzip xz-utils wget
+        ccache unzip xz-utils wget
 COMMAND
 
 FROM base as source

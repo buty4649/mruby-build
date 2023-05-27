@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+require 'fileutils'
+require 'rake'
+
 mruby_root = "/mruby"
 build_config = File.expand_path(ENV["MRUBY_CONFIG"] || "build_config.rb")
 build_dir = File.expand_path(ENV["MRUBY_BUILD_DIR"] || "build")
@@ -9,8 +12,13 @@ ENV["MRUBY_CONFIG"] = build_config
 ENV["MRUBY_BUILD_DIR"] = build_dir
 ENV["INSTALL_DIR"] = install_dir
 
+if ENV["USE_CCACHE"]
+  ccache_dir = File.expand_path("build/ccache")
+  FileUtils.mkdir_p(ccache_dir)
+  ENV["CCACHE_DIR"] = ccache_dir
+end
+
 task = ARGV.first || "all"
 
-require "rake"
 load "#{mruby_root}/Rakefile"
 Rake::Task[task].invoke
