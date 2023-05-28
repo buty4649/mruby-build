@@ -7,7 +7,7 @@ RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
     apt-get upgrade -yy
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         build-essential git bison gperf libtool-bin autoconf libyaml-dev \
-        ccache unzip xz-utils wget gosu
+        gcc-mingw-w64 g++-mingw-w64 ccache unzip xz-utils wget gosu
 COMMAND
 
 FROM base as source
