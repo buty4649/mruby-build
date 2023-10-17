@@ -7,7 +7,7 @@ RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
     apt-get upgrade -yy
     DEBIAN_FRONTEND=noninteractive apt-get install -y \
         build-essential git bison gperf libtool-bin autoconf libyaml-dev \
-        gcc-mingw-w64 g++-mingw-w64 ccache unzip xz-utils wget gosu
+        gcc-mingw-w64 g++-mingw-w64 ccache unzip xz-utils wget gosu jq
 COMMAND
 
 FROM base as source
@@ -17,6 +17,13 @@ RUN <<COMMAND
     wget https://github.com/mruby/mruby/archive/${MRUBY_VERSION}.zip -O mruby.zip
     unzip mruby.zip
     mv mruby-${MRUBY_VERSION} mruby
+
+    if [ "${MRUBY_VERSION}" = "master" ]; then
+        REF="heads/master"
+    else
+        REF="tags/${MRUBY_VERSION}"
+    fi
+    wget -q -O - https://api.github.com/repos/mruby/mruby/commits/${REF} | jq -r '.sha' > /mruby/COMMIT
 COMMAND
 
 FROM base as zig
