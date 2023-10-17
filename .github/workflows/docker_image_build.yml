@@ -7,7 +7,7 @@ on:
         default: false
         type: boolean
       mruby-version:
-        default: '3.2.0'
+        default: 'master'
         type: string
     secrets:
       dockerhub_username:
