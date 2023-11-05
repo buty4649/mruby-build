@@ -26,6 +26,12 @@ RUN <<COMMAND
     wget -q -O - https://api.github.com/repos/mruby/mruby/commits/${REF} | jq -r '.sha' > /mruby/COMMIT
 COMMAND
 
+COPY mrbgems/mruby-commit-id /mruby/mrbgems/mruby-commit-id
+
+RUN <<COMMAND
+    sed -i 's/%COMMIT_ID%/'`cat /mruby/COMMIT`'/' /mruby/mrbgems/mruby-commit-id/src/commit_id.c
+COMMAND
+
 FROM base as zig
 ARG ZIG_VERSION=0.11.0
 ENV ZIG_MINISIGN_PUBKEY=RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U
