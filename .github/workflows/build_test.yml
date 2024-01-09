@@ -5,9 +5,7 @@ on:
     paths:
       - .github/workflows/build-test.yml
       - .github/workflows/docker_image_build.yml
-      - Dockerfile
-      - entrypoint.sh
-      - mruby-build.rb
+      - docker/**/*
 
 jobs:
   build:
