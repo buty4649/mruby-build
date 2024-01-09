@@ -72,7 +72,7 @@ COPY --from=MacOS_SDK MacOSX.sdk /usr/local/share/MacOSX.sdk
 ENV MACOSX_SDK_PATH=/usr/local/share/MacOSX.sdk
 
 COPY entrypoint.sh /entrypoint.sh
-COPY mruby-build.rb /mruby-build.rb
+COPY Rakefile /Rakefile
 
 WORKDIR /src
 ENTRYPOINT [ "/entrypoint.sh" ]
