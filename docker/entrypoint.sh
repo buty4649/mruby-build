@@ -15,7 +15,7 @@ else
     useradd -o -m -u $BUILD_UID -g $BUILD_GID -s /bin/bash -d /home/$BUILD_USER $BUILD_USER
 fi
 
-case $1 in
+case "${1:-}" in
     "shell"|"/bin/bash"|"/bin/sh"|"bash"|"sh")
         shift
         COMMAND=bash
