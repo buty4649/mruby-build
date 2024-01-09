@@ -29,8 +29,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
-          file: ./Dockerfile
+          context: ./docker
+          file: ./docker/Dockerfile
           push: ${{ inputs.push }}
           tags: ${{ secrets.dockerhub_username }}/mruby-build:${{ inputs.mruby-version }}
           build-args: |
