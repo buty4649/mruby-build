@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1-labs
 
-FROM rubylang/ruby:3.2-jammy as base
+FROM rubylang/ruby:3.3-jammy as base
 
 RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
     apt-get update
