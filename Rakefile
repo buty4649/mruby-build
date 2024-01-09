@@ -7,5 +7,5 @@ end
 
 desc "Build docker image"
 task "build" do
-  sh "docker buildx build -t #{IMAGE_TAG} #{no_cache_flag} --build-arg MRUBY_VERSION=#{MRUBY_VERSION} ."
+  sh "docker buildx build -t #{IMAGE_TAG} #{no_cache_flag} --build-arg MRUBY_VERSION=#{MRUBY_VERSION} docker/"
 end
