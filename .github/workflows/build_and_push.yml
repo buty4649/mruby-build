@@ -1,16 +1,16 @@
 name: Build and push
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   build:
     uses: ./.github/workflows/docker_image_build.yml
     with:
       push: true
+      image_version: ${{ github.ref_name }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}

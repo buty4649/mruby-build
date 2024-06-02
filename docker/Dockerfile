@@ -10,30 +10,8 @@ RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
         gcc-mingw-w64 g++-mingw-w64 unzip xz-utils wget gosu jq
 COMMAND
 
-FROM base as source
-ARG MRUBY_VERSION=3.2.0
-
-RUN <<COMMAND
-    wget https://github.com/mruby/mruby/archive/${MRUBY_VERSION}.zip -O mruby.zip
-    unzip mruby.zip
-    mv mruby-${MRUBY_VERSION} mruby
-
-    if [ "${MRUBY_VERSION}" = "master" ]; then
-        REF="heads/master"
-    else
-        REF="tags/${MRUBY_VERSION}"
-    fi
-    wget -q -O - https://api.github.com/repos/mruby/mruby/commits/${REF} | jq -r '.sha' > /mruby/COMMIT
-COMMAND
-
-COPY mrbgems/mruby-commit-id /mruby/mrbgems/mruby-commit-id
-
-RUN <<COMMAND
-    sed -i 's/%COMMIT_ID%/'`cat /mruby/COMMIT`'/' /mruby/mrbgems/mruby-commit-id/src/commit_id.c
-COMMAND
-
 FROM base as zig
-ARG ZIG_VERSION=0.11.0
+ARG ZIG_VERSION=0.12.0
 ENV ZIG_MINISIGN_PUBKEY=RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U
 
 RUN <<COMMAND
@@ -62,8 +40,6 @@ COMMAND
 RUN rm -r MacOSX.sdk/usr/share/man
 
 FROM base
-
-COPY --from=source /mruby /mruby
 
 COPY --from=zig zig /usr/local/share/zig
 RUN ln -s /usr/local/share/zig/zig /usr/local/bin/zig
