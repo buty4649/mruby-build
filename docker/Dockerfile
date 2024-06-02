@@ -11,7 +11,7 @@ RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
 COMMAND
 
 FROM base as zig
-ARG ZIG_VERSION=0.11.0
+ARG ZIG_VERSION=0.12.0
 ENV ZIG_MINISIGN_PUBKEY=RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U
 
 RUN <<COMMAND
