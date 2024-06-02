@@ -1,6 +1,6 @@
 require 'fileutils'
 
-mruby_root = "/mruby"
+mruby_root = File.expand_path(ENV["MRUBY_ROOT"] || "./mruby")
 build_config = File.expand_path(ENV["MRUBY_CONFIG"] || "build_config.rb")
 build_dir = File.expand_path(ENV["MRUBY_BUILD_DIR"] || "build")
 install_dir = File.expand_path(ENV["MRUBY_INSTALL_DIR"] || "build/bin")

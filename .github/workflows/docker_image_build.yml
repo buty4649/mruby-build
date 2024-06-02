@@ -6,8 +6,9 @@ on:
       push:
         default: false
         type: boolean
-      mruby-version:
-        default: 'master'
+      image_version:
+        required: true
+        default: ${{ github.sha }}
         type: string
     secrets:
       dockerhub_username:
@@ -32,6 +33,4 @@ jobs:
           context: ./docker
           file: ./docker/Dockerfile
           push: ${{ inputs.push }}
-          tags: ${{ secrets.dockerhub_username }}/mruby-build:${{ inputs.mruby-version }}
-          build-args: |
-            MRUBY_VERSION=${{ inputs.mruby-version }}
+          tags: ${{ secrets.dockerhub_username }}/mruby-build:${{ inputs.image_version }}
