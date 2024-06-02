@@ -1,11 +1,6 @@
 name: Build and push
 
 on:
-  workflow_dispatch:
-    inputs:
-      image_version:
-        required: true
-        type: string
   push:
     tags:
       - '*'
@@ -15,7 +10,7 @@ jobs:
     uses: ./.github/workflows/docker_image_build.yml
     with:
       push: true
-      image_version: ${{ github.event_name == 'push' && github.ref_type == 'tag' ? github.ref_name : github.event.inputs.image_version }}
+      image_version: ${{ github.ref_name }}
     secrets:
       dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
