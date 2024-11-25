@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1-labs
 
-FROM rubylang/ruby:3.3-jammy as base
+FROM rubylang/ruby:3.3-jammy AS base
 
 RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
     apt-get update
@@ -27,7 +27,7 @@ RUN <<COMMAND
     mv zig-linux-x86_64-${ZIG_VERSION} zig
 COMMAND
 
-FROM base as MacOS_SDK
+FROM base AS macos_sdk
 ARG MACOS_SDK_VERSION=11.3
 
 RUN <<COMMAND
@@ -44,7 +44,7 @@ FROM base
 COPY --from=zig zig /usr/local/share/zig
 RUN ln -s /usr/local/share/zig/zig /usr/local/bin/zig
 
-COPY --from=MacOS_SDK MacOSX.sdk /usr/local/share/MacOSX.sdk
+COPY --from=macos_sdk MacOSX.sdk /usr/local/share/MacOSX.sdk
 ENV MACOSX_SDK_PATH=/usr/local/share/MacOSX.sdk
 
 COPY entrypoint.sh /entrypoint.sh
