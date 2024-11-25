@@ -10,8 +10,8 @@ RUN --mount=type=cache,target=/var/lib/apt <<COMMAND
         gcc-mingw-w64 g++-mingw-w64 unzip xz-utils wget gosu jq
 COMMAND
 
-FROM base as zig
-ARG ZIG_VERSION=0.12.0
+FROM base AS zig
+ARG ZIG_VERSION=0.13.0
 ENV ZIG_MINISIGN_PUBKEY=RWSGOq2NVecA2UPNdBUZykf1CCb147pkmdtYxgb3Ti+JO/wCYvhbAb/U
 
 RUN <<COMMAND
